@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROHINDH K | FULL STACK ENGINEER</title>
+    <style>
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --transition: 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        #navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            z-index: 100;
+            background-color: var(--black);
+            border-bottom: 1px solid var(--white);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--white);
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 8rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+        
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--white);
+        }
+        
+        /* Hero Section */
+        #hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .hero-title span {
+            display: block;
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        
+        /* Cards */
+        .card {
+            border: 1px solid var(--white);
+            padding: 2rem;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
+        
+        .card:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        /* Skills */
+        .skills-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 1rem;
+}
+
+.skill-item {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border: 1px solid var(--white);
+    transition: var(--transition);
+    cursor: default;
+}
+
+.skill-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+@media (max-width: 1024px) {
+    .skills-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .skills-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+        
+        /* Projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .project-card {
+            border: 1px solid var(--white);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .project-card h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .project-card .tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .project-card .tech span {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.8rem;
+            border: 1px solid var(--white);
+        }
+        
+        .project-card:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .project-link {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid var(--white);
+            transition: var(--transition);
+        }
+        
+        .project-link:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+        
+        /* Contact */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-link {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Resume Button */
+        .resume-btn {
+            display: block;
+            width: 200px;
+            margin: 3rem auto 0;
+            padding: 1rem 2rem;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border-radius: 0;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--white);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .resume-btn:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 6rem 1.5rem 3rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .skills-container {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-links">
+            <a href="#hero" class="nav-link">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="active">
+        <div class="container">
+            <div class="hero-title">
+                <span>COMPUTER SCIENCE ENGINEER</span>
+                <h1>ROHINDH K</h1>
+            </div>
+            <p>Full stack developer specializing in Python, Django, and Flutter applications</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="card">
+            <h3>CAREER OBJECTIVE</h3>
+            <p>As a Computer Science Engineering student, I aim to leverage my technical knowledge and practical experience to contribute meaningfully to forward-thinking organizations. I'm excited to collaborate on innovative tech projects that solve real-world problems.</p>
+        </div>
+        
+        <h2>Education</h2>
+        <div class="card">
+            <h3>B.E COMPUTER SCIENCE AND ENGINEERING | CGPA 8.7</h3>
+            <p>2022-2026 | Study World College of Engineering</p>
+        </div>
+        <div class="card">
+            <h3>HIGHER SECONDARY EDUCATION | 89%</h3>
+            <p>2021-2022 | GHSS Malumichampatti</p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-item">Django</div>
+            <div class="skill-item">Flutter</div>
+            <div class="skill-item">Flask</div>
+            <div class="skill-item">React</div>
+            <div class="skill-item">Python</div>
+            <div class="skill-item">JavaScript</div>
+            <div class="skill-item">SQL</div>
+            <div class="skill-item">UI/UX</div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>ChatX</h3>
+                <p>A WhatsApp chat downloading platform that allows users to export their chat conversations.</p>
+                <div class="tech">
+                    <span>Python</span>
+                    <span>Django</span>
+                    <span>JavaScript</span>
+                </div>
+                <div class="project-links">
+                    <p>
+  <a href="https://chatx.pythonanywhere.com/" class="project-link">
+    Live Demo
+  </a>
+  
+</p>
+
+                    
+                </div>
+            </div>
+            <div class="project-card">
+                <h3>Online Secure File Transfer</h3>
+                <p>A secure platform for encrypted file sharing between users with end-to-end encryption.</p>
+                <div class="tech">
+                    <span>Python</span>
+                    <span>Flask</span>
+                    <span>SQLite</span>
+                </div>
+                <div class="project-links">
+                    <p>
+  <a href="https://hifichat.pythonanywhere.com/" class="project-link">
+    Live Demo
+  </a>
+  
+</p>
+
+                </div>
+            </div>
+            <div class="project-card">
+                <h3>Offline WiFi File Transfer</h3>
+                <p>Local network file sharing application with GUI for fast transfers without internet.</p>
+                <div class="tech">
+                    <span>Python</span>
+                    <span>Tkinter</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact</h2>
+        <div class="card">
+            <div class="contact-item">
+                <div class="contact-icon">✆</div>
+                <div>
+                    <h3>Phone</h3>
+                    <p>+91 98942 97566</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">✉</div>
+                <div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:iamrohindh@gmail.com" class="contact-link">iamrohindh@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">⌂</div>
+                <div>
+                    <h3>Location</h3>
+                    <p>Coimbatore, India</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">⎘</div>
+                <div>
+                    <h3>GitHub</h3>
+                    <p><a href="https://github.com/Rohindh143No/" class="contact-link">github.com/Rohindh143No</a></p>
+                </div>
+            </div>
+        </div>
+        <a href="ROHINDH_K_RESUME.pdf" class="resume-btn">Download Resume</a>
+    </section>
+
+    <script>
+        // Section activation on scroll
+        const sections = document.querySelectorAll('section');
+        
+        function checkScroll() {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight * 0.75) {
+                    section.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        checkScroll();
+    </script>
+</body>
+</html>
